@@ -35,6 +35,8 @@ jobs:
           add: '.'
           message: v${{ steps.updatedPackageInfo.outputs.version }}
           tag: v${{ steps.updatedPackageInfo.outputs.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish to npm
         uses: Borales/actions-yarn@v2.3.0
         with:
