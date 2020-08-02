@@ -1,0 +1,34 @@
+name: Publish new version
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1.1.0
+      - name: Apply changeset
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: changeset version
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: git Actions
+        uses: srt32/git-actions@v0.0.3
+        with:
+          cmd: add .
+      - name: Publish to npm
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: publish
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: main
+          tags: true

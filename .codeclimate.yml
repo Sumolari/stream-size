@@ -1,16 +1,12 @@
 version: '2'
 exclude_patterns:
-  - '**/.nyc_output'
-  - '**/coverage/'
-  - '**/dist.commonjs/'
-  - '**/dist.es6/'
-  - '**/node_modules/'
-  - '**/tests/'
-  - '**/dist/'
-  - '**/dist.ssr/'
-  - '**/dist.client/'
-  - '**/dist.server/'
-  - 'iframely'
+  - '.changeset'
+  - '.github'
+  - '.nyc_output'
+  - 'coverage'
+  - 'dist'
+  - 'node_modules'
+  - 'tests'
 
 checks:
   argument-count:

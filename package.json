@@ -12,8 +12,8 @@
     "build": "run-s build:* lint:build",
     "build:commonjs": "tsc --p tsconfig.commonjs.json",
     "build:es6": "tsc --p tsconfig.es6.json",
-    "test": "run-s lint test:coverage",
-    "test:coverage": "nyc mocha",
+    "test": "run-s lint coverage",
+    "coverage": "nyc mocha",
     "deduplicate": "yarn-deduplicate yarn.lock",
     "format": "prettier --config .prettierrc 'src/**/*.ts' 'test/**/*.ts' --write",
     "prepublishOnly": "run-s test build"
