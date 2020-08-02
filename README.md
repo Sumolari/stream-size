@@ -1,3 +1,8 @@
+[![npm](https://img.shields.io/npm/v/stream-size)](https://www.npmjs.com/package/stream-size)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ed74c7c06962544829cf/maintainability)](https://codeclimate.com/github/Sumolari/stream-size/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ed74c7c06962544829cf/test_coverage)](https://codeclimate.com/github/Sumolari/stream-size/test_coverage)
+[![NPM](https://img.shields.io/npm/l/stream-size)](https://www.npmjs.com/package/stream-size)
+
 `stream-size` is a non-destructive transformation for Node.js streams that adds a `sizeInBytes` property to your streams.
 
 It also allows you to limit streams exceeding a maximum size.
