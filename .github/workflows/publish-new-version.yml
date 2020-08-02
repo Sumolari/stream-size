@@ -47,6 +47,21 @@ jobs:
         with:
           cmd: publish
           auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Disable main branch protection
+        uses: actions/github-script@v2
+        if: ${{ steps.originalPackageInfo.outputs.version != steps.updatedPackageInfo.outputs.version }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.repos.updateBranchProtection({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              branch: 'main',
+              required_status_checks: null,
+              enforce_admins: null,
+              required_pull_request_reviews: null,
+              restrictions: null,
+            })
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
         if: ${{ steps.originalPackageInfo.outputs.version != steps.updatedPackageInfo.outputs.version }}
@@ -54,3 +69,21 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
           tags: true
+      - name: Enable main branch protection
+        uses: actions/github-script@v2
+        if: ${{ steps.originalPackageInfo.outputs.version != steps.updatedPackageInfo.outputs.version }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.repos.updateBranchProtection({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              branch: 'main',
+              required_status_checks: {
+                strict: true,
+                contexts: ['changeset', 'lint', 'prettify', 'test'],
+              },
+              enforce_admins: null,
+              required_pull_request_reviews: null,
+              restrictions: null,
+            })
