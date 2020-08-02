@@ -2,10 +2,24 @@
   "name": "stream-size",
   "version": "0.0.3",
   "description": "Get the size of a stream and abort it if threshold is reached",
-  "main": "index.js",
-  "author": "Lluís",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/es6/index.js",
+  "repository": "Sumolari/stream-size",
+  "folder": "dist",
+  "author": "Lluís Ulzurrun de Asanza Sàez <me@llu.is> (http://llu.is)",
   "license": "MIT",
   "private": false,
+  "keywords": [
+    "stream",
+    "size",
+    "bytes",
+    "length",
+    "content-length",
+    "typescript"
+  ],
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "lint": "eslint **/*.ts",
     "lint:build": "es-check es5 dist/commonjs/*.js",
