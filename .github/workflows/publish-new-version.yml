@@ -26,6 +26,15 @@ jobs:
         uses: srt32/git-actions@v0.0.3
         with:
           cmd: add .
+      - name: Get updated package info
+        id: updatedPackageInfo
+        uses: gregoranders/nodejs-project-info@v0.0.10
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v4.4.0
+        with:
+          add: '.'
+          message: v${{ steps.updatedPackageInfo.outputs.version }}
+          tag: v${{ steps.updatedPackageInfo.outputs.version }}
       - name: Publish to npm
         uses: Borales/actions-yarn@v2.3.0
         with:
