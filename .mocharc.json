@@ -1,0 +1,7 @@
+{
+  "timeout": "1s",
+  "require": ["ts-node/register", "source-map-support/register"],
+  "full-trace": true,
+  "recursive": true,
+  "spec": "test/**/*spec.ts"
+}
