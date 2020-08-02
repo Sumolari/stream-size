@@ -1,0 +1,26 @@
+name: Lint and test
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1.1.0
+      - name: Apply changeset
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: changeset version
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: git Actions
+        uses: srt32/git-actions@v0.0.3
+        with:
+          cmd: add .
+      - name: Publish to npm
+        uses: pascalgn/npm-publish-action@1.3.3

@@ -1,0 +1,62 @@
+name: Lint and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+      - name: Get original package info
+        id: originalPackageInfo
+        uses: gregoranders/nodejs-project-info@v0.0.10
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1.1.0
+      - name: Run Prettier Action
+        uses: creyD/prettier_action@v3.0
+        with:
+          commit_message: ':art: Prettify code!'
+          prettier_options: prettier --write **/*
+      - name: Add Changeset
+        uses: ianwalter/add-changeset@v1.0.8
+        with:
+          type: patch
+      - name: Apply changeset
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: changeset version
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Get updated package info
+        id: updatedPackageInfo
+        uses: gregoranders/nodejs-project-info@v0.0.10
+      - name: Ensure package.json has been updated
+        uses: actions/github-script@v2
+        if: ${{ steps.originalPackageInfo.outputs.version == steps.updatedPackageInfo.outputs.version }}
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '❌ This PR is missing a changeset!'
+            })
+      - name: Run linter
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: lint
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: Upload coverage info to Code Climate
+        uses: paambaati/codeclimate-action@v2.6.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageCommand: yarn coverage
+          coverageLocations: |
+            ${{github.workspace}}/coverage/lcov.info:lcov
