@@ -51,7 +51,7 @@ jobs:
         uses: actions/github-script@v2
         if: ${{ steps.originalPackageInfo.outputs.version != steps.updatedPackageInfo.outputs.version }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.BRANCH_PROTECTION_GITHUB_TOKEN }}
           script: |
             github.repos.updateBranchProtection({
               owner: context.repo.owner,
@@ -73,7 +73,7 @@ jobs:
         uses: actions/github-script@v2
         if: ${{ steps.originalPackageInfo.outputs.version != steps.updatedPackageInfo.outputs.version }}
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.BRANCH_PROTECTION_GITHUB_TOKEN }}
           script: |
             github.repos.updateBranchProtection({
               owner: context.repo.owner,
