@@ -1,4 +1,4 @@
-name: Lint and test
+name: Publish new version
 
 on:
   push:
@@ -23,4 +23,12 @@ jobs:
         with:
           cmd: add .
       - name: Publish to npm
-        uses: pascalgn/npm-publish-action@1.3.3
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: publish
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: main
+          tags: true
