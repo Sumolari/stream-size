@@ -1,5 +1,11 @@
 # stream-size
 
+## 0.0.6
+
+### Patch Changes
+
+- f898ccf: Forcing release to test Github Workflows integration
+
 ## 0.0.5
 
 ### Patch Changes
