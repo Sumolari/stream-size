@@ -4,6 +4,9 @@ export type StreamWithSize = Transform & {
   sizeInBytes: number;
 };
 
+/**
+ * @param maximumSizeInBytesAllowed Optional. Set this parameter to the maximum amount of bytes before throwing an error and closing the stream. Leave unset to allow any amount of bytes and not apply any limit.
+ */
 function getSizeTransform(maximumSizeInBytesAllowed?: number): StreamWithSize {
   const transformedStream = new Transform({
     transform(this: StreamWithSize, chunk, encoding: BufferEncoding, callback) {
