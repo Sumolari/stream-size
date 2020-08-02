@@ -1,6 +1,6 @@
 {
   "name": "stream-size",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Get the size of a stream and abort it if threshold is reached",
   "main": "dist/commonjs/index.js",
   "module": "dist/es6/index.js",
