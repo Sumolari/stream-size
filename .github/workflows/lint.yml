@@ -16,7 +16,6 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1.1.0
       - name: Run linter
-        uses: Borales/actions-yarn@v2.3.0
-        with:
-          cmd: lint
+        run: yarn lint
+        env:
           auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
