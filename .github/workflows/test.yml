@@ -19,8 +19,6 @@ jobs:
         uses: bahmutov/npm-install@v1.1.0
       - name: Run tests
         run: yarn coverage
-        env:
-          CI: "1"
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
