@@ -10,11 +10,11 @@ jobs:
 
     steps:
       - name: Checkout branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           ref: ${{ github.head_ref }}
       - name: Run Prettier Action
-        uses: creyD/prettier_action@v3.0
+        uses: creyD/prettier_action@8c18391fdc98ed0d884c6345f03975edac71b8f0 # v4.6
         with:
           commit_message: ':art: Prettify code!'
           prettier_options: --write **/*
