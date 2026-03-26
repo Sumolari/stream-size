@@ -17,7 +17,7 @@ jobs:
         id: originalPackageInfo
         uses: gregoranders/nodejs-project-info@2708b2315a68f7070cccff1362e5fbf05584b9a7 # v0.0.21
       - name: Add Changeset
-        uses: ianwalter/add-changeset@b134b46d61041218a68dc3dd8580019aa51f5e9d # v3.0.0
+        uses: Sumolari/changeset-action@de60e4de2950d174862e293ae11804ebbc1131d4 # v3.0.0-node-24-trixie-slim
         with:
           type: patch
       - name: Apply changeset
